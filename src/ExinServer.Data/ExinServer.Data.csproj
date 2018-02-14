@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <CodeAnalysisRuleSet>$(SolutionDir)\StyleCopRules.ruleset</CodeAnalysisRuleSet>
+    <OutputPath>..\..\build\bin</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExinServer.Data.Abstraction\ExinServer.Data.Abstraction.csproj" />
+    <ProjectReference Include="..\ExinServer.Data.Sqlite\ExinServer.Data.Sqlite.csproj" />
+  </ItemGroup>
+
+</Project>
