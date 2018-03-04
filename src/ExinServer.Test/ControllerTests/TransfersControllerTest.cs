@@ -21,6 +21,7 @@ using ExinServer.Data.Abstraction.Exceptions;
 using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
+using ExinServer.Web.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -29,12 +30,21 @@ namespace ExinServer.Test.ControllerTests
     public class TransfersControllerTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
         public void Create_WhenParamNull_ShouldThrow()
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new TransfersController(dataLayer))
                 controller.Create(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Create_WhenTitleNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new TransfersController(dataLayer))
+                controller.Create(new NewTransfer(1, 1, 1, null, DateTime.UtcNow, 0.3M, null, null));
         }
 
         [TestMethod]
@@ -203,6 +213,24 @@ namespace ExinServer.Test.ControllerTests
             }
 
             AssertTransfersInList(queriedTransfers, createdTransfer1, createdTransfer2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Update_WhenNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new TransfersController(dataLayer))
+                controller.Update(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Update_WhenNameNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new TransfersController(dataLayer))
+                controller.Update(new TransferUpdate(1, 1, 1, 1, null, DateTime.UtcNow, 0.3M, null, null));
         }
 
         [TestMethod]

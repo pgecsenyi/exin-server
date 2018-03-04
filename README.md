@@ -28,4 +28,4 @@ You can also use _Visual Studio Code_ to debug the application.
   * Ubuntu 17.10
   * .NET Core 2.1.4
   * Visual Studio Code 1.19.3
-    * Extension: C# 1.13.1
+    * Extension: C# 1.14.0

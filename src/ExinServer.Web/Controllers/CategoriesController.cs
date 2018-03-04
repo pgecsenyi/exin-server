@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using ExinServer.Data.Abstraction;
 using ExinServer.Web.Entities;
 using ExinServer.Web.EntityExtensions;
+using ExinServer.Web.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExinServer.Web.Controllers
@@ -36,6 +37,11 @@ namespace ExinServer.Web.Controllers
         [HttpPut]
         public Category Create([FromBody]NewCategory newCategory)
         {
+            if (newCategory == null)
+                throw new InvalidRequestArgumentException("The category cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(newCategory.Name))
+                throw new InvalidRequestArgumentException("Category name cannot be null or empty.");
+
             return dataLayer.CreateCategory(newCategory.ToAbstract()).ToWeb();
         }
 
@@ -64,6 +70,11 @@ namespace ExinServer.Web.Controllers
         [HttpPost]
         public Category Update([FromBody]CategoryUpdate updatedCategory)
         {
+            if (updatedCategory == null)
+                throw new InvalidRequestArgumentException("The category cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(updatedCategory.Name))
+                throw new InvalidRequestArgumentException("Category name cannot be null or empty.");
+
             return dataLayer.UpdateCategory(updatedCategory.ToAbstract()).ToWeb();
         }
     }

@@ -17,25 +17,35 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace ExinServer.Data.Abstraction.Exceptions
+namespace ExinServer.Web.Exceptions
 {
-    public class RecordAlreadyExistsException : Exception
+    public class InvalidRequestArgumentException : ArgumentException
     {
-        public RecordAlreadyExistsException()
+        public InvalidRequestArgumentException()
         {
         }
 
-        public RecordAlreadyExistsException(string message)
+        public InvalidRequestArgumentException(string message)
             : base(message)
         {
         }
 
-        public RecordAlreadyExistsException(string message, Exception innerException)
+        public InvalidRequestArgumentException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected RecordAlreadyExistsException(SerializationInfo info, StreamingContext context)
+        public InvalidRequestArgumentException(string message, string paramName)
+            : base(message, paramName)
+        {
+        }
+
+        public InvalidRequestArgumentException(string message, string paramName, Exception innerException)
+            : base(message, paramName, innerException)
+        {
+        }
+
+        protected InvalidRequestArgumentException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

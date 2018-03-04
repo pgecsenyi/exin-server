@@ -21,6 +21,7 @@ using ExinServer.Data.Abstraction.Exceptions;
 using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
+using ExinServer.Web.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -29,12 +30,21 @@ namespace ExinServer.Test.ControllerTests
     public class PartnersControllerTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
         public void Create_WhenParamNull_ShouldThrow()
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
                 controller.Create(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Create_WhenNameNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new PartnersController(dataLayer))
+                controller.Create(new NewPartner(null, null));
         }
 
         [TestMethod]
@@ -144,6 +154,24 @@ namespace ExinServer.Test.ControllerTests
             }
 
             AssertPartnersInList(queriedPartners, createdPartner1, createdPartner2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Update_WhenNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new CurrenciesController(dataLayer))
+                controller.Update(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Update_WhenNameNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new PartnersController(dataLayer))
+                controller.Update(new PartnerUpdate(1, null, null));
         }
 
         [TestMethod]

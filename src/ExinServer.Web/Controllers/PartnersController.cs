@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using ExinServer.Data.Abstraction;
 using ExinServer.Web.Entities;
 using ExinServer.Web.EntityExtensions;
+using ExinServer.Web.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExinServer.Web.Controllers
@@ -36,6 +37,11 @@ namespace ExinServer.Web.Controllers
         [HttpPut]
         public Partner Create([FromBody]NewPartner newPartner)
         {
+            if (newPartner == null)
+                throw new InvalidRequestArgumentException("The partner cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(newPartner.Name))
+                throw new InvalidRequestArgumentException("Partner name cannot be null or empty.");
+
             return dataLayer.CreatePartner(newPartner.ToAbstract()).ToWeb();
         }
 
@@ -64,6 +70,11 @@ namespace ExinServer.Web.Controllers
         [HttpPost]
         public Partner Update([FromBody]PartnerUpdate partnerUpdate)
         {
+            if (partnerUpdate == null)
+                throw new InvalidRequestArgumentException("The partner cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(partnerUpdate.Name))
+                throw new InvalidRequestArgumentException("Partner name cannot be null or empty.");
+
             return dataLayer.UpdatePartner(partnerUpdate.ToAbstract()).ToWeb();
         }
     }

@@ -21,6 +21,7 @@ using ExinServer.Data.Abstraction.Exceptions;
 using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
+using ExinServer.Web.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -29,12 +30,21 @@ namespace ExinServer.Test.ControllerTests
     public class CurrenciesControllerTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
         public void Create_WhenParamNull_ShouldThrow()
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
                 controller.Create(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Create_WhenCodeNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new CurrenciesController(dataLayer))
+                controller.Create(new NewCurrency(null));
         }
 
         [TestMethod]
@@ -142,6 +152,24 @@ namespace ExinServer.Test.ControllerTests
             }
 
             AssertCurrenciesInList(queriedCurrencies, queriedCurrency1, queriedCurrency2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Update_WhenNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new CurrenciesController(dataLayer))
+                controller.Update(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestArgumentException))]
+        public void Update_WhenCodeNull_ShouldThrow()
+        {
+            using (var dataLayer = DataLayerHelper.CreateDataLayer())
+            using (var controller = new CurrenciesController(dataLayer))
+                controller.Update(new CurrencyUpdate(1, null));
         }
 
         [TestMethod]

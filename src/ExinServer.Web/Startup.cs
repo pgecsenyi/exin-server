@@ -17,6 +17,7 @@
 using System;
 using ExinServer.Data;
 using ExinServer.Data.Abstraction;
+using ExinServer.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

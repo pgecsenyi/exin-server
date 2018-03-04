@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using ExinServer.Data.Abstraction;
 using ExinServer.Web.Entities;
 using ExinServer.Web.EntityExtensions;
+using ExinServer.Web.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExinServer.Web.Controllers
@@ -36,6 +37,11 @@ namespace ExinServer.Web.Controllers
         [HttpPut]
         public Transfer Create([FromBody]NewTransfer newTransfer)
         {
+            if (newTransfer == null)
+                throw new InvalidRequestArgumentException("The transfer cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(newTransfer.Title))
+                throw new InvalidRequestArgumentException("Transfer title cannot be null or empty.");
+
             return dataLayer.CreateTransfer(newTransfer.ToAbstract()).ToWeb();
         }
 
@@ -64,6 +70,11 @@ namespace ExinServer.Web.Controllers
         [HttpPost]
         public Transfer Update([FromBody]TransferUpdate transferUpdate)
         {
+            if (transferUpdate == null)
+                throw new InvalidRequestArgumentException("The transfer cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(transferUpdate.Title))
+                throw new InvalidRequestArgumentException("Transfer title cannot be null or empty.");
+
             return dataLayer.UpdateTransfer(transferUpdate.ToAbstract()).ToWeb();
         }
     }

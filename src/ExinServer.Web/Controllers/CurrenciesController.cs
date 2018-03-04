@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using ExinServer.Data.Abstraction;
 using ExinServer.Web.Entities;
 using ExinServer.Web.EntityExtensions;
+using ExinServer.Web.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExinServer.Web.Controllers
@@ -36,6 +37,11 @@ namespace ExinServer.Web.Controllers
         [HttpPut]
         public Currency Create([FromBody]NewCurrency newCurrency)
         {
+            if (newCurrency == null)
+                throw new InvalidRequestArgumentException("The currency cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(newCurrency.Code))
+                throw new InvalidRequestArgumentException("Currency code cannot be null or empty.");
+
             return dataLayer.CreateCurrency(newCurrency.ToAbstract()).ToWeb();
         }
 
@@ -64,6 +70,11 @@ namespace ExinServer.Web.Controllers
         [HttpPost]
         public Currency Update([FromBody]CurrencyUpdate currencyUpdate)
         {
+            if (currencyUpdate == null)
+                throw new InvalidRequestArgumentException("The currency cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(currencyUpdate.Code))
+                throw new InvalidRequestArgumentException("Currency code cannot be null or empty.");
+
             return dataLayer.UpdateCurrency(currencyUpdate.ToAbstract()).ToWeb();
         }
     }
