@@ -21,6 +21,7 @@ using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
 using ExinServer.Web.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -63,12 +64,17 @@ namespace ExinServer.Test.ControllerTests
         public void Create_Normally_ShouldReturn_Currency()
         {
             var newCurrency = TestDataProvider.CreateNewCurrency();
+            CreatedAtActionResult actionResult;
             Currency currency;
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
-                currency = controller.CreateCurrency(newCurrency);
+            {
+                actionResult = (CreatedAtActionResult)controller.Create(newCurrency);
+                currency = (Currency)actionResult.Value;
+            }
 
+            Assert.AreEqual(actionResult.ActionName, "Get");
             Assert.IsTrue(
                 currency.Id > 0,
                 $"Currency ID is expected to greater than 0. Actual: {currency.Id}.");

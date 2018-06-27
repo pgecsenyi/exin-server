@@ -22,6 +22,7 @@ using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
 using ExinServer.Web.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -154,6 +155,7 @@ namespace ExinServer.Test.ControllerTests
         [TestMethod]
         public void Get_Normally_ShouldReturn_TransferWithId()
         {
+            CreatedAtActionResult actionResult;
             Transfer createdTransfer, queriedTransfer;
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
@@ -171,10 +173,12 @@ namespace ExinServer.Test.ControllerTests
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                createdTransfer = transfersController.CreateTransfer(newTransfer);
+                actionResult = (CreatedAtActionResult)transfersController.Create(newTransfer);
+                createdTransfer = (Transfer)actionResult.Value;
                 queriedTransfer = transfersController.Get(createdTransfer.Id);
             }
 
+            Assert.AreEqual(actionResult.ActionName, "Get");
             Assert.IsTrue(
                 queriedTransfer.IsEqualTo(createdTransfer),
                 "The two transfers should be equal. "

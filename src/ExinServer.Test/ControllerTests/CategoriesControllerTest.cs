@@ -21,6 +21,7 @@ using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
 using ExinServer.Web.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -63,12 +64,17 @@ namespace ExinServer.Test.ControllerTests
         public void Create_Normally_ShouldReturn_Category()
         {
             var newCategory = TestDataProvider.CreateNewCategory();
+            CreatedAtActionResult actionResult;
             Category category;
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
-                category = controller.CreateCategory(newCategory);
+            {
+                actionResult = (CreatedAtActionResult)controller.Create(newCategory);
+                category = (Category)actionResult.Value;
+            }
 
+            Assert.AreEqual(actionResult.ActionName, "Get");
             Assert.IsTrue(
                 category.Id > 0,
                 $"Category ID is expected to greater than 0. Actual: {category.Id}.");

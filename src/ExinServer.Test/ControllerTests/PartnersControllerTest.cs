@@ -21,6 +21,7 @@ using ExinServer.Test.Common;
 using ExinServer.Web.Controllers;
 using ExinServer.Web.Entities;
 using ExinServer.Web.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExinServer.Test.ControllerTests
@@ -63,12 +64,17 @@ namespace ExinServer.Test.ControllerTests
         public void Create_Normally_ShouldReturn_Partner()
         {
             var newPartner = TestDataProvider.CreateNewPartner();
+            CreatedAtActionResult actionResult;
             Partner partner;
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
-                partner = controller.CreatePartner(newPartner);
+            {
+                actionResult = (CreatedAtActionResult)controller.Create(newPartner);
+                partner = (Partner)actionResult.Value;
+            }
 
+            Assert.AreEqual(actionResult.ActionName, "Get");
             Assert.IsTrue(
                 partner.Id > 0,
                 $"Partner ID is expected to greater than 0. Actual: {partner.Id}.");
