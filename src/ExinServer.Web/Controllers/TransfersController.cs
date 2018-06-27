@@ -35,21 +35,25 @@ namespace ExinServer.Web.Controllers
 
         // PUT api/transfers
         [HttpPut]
-        public Transfer Create([FromBody]NewTransfer newTransfer)
+        public IActionResult Create([FromBody]NewTransfer newTransfer)
         {
             if (newTransfer == null)
                 throw new InvalidRequestArgumentException("The transfer cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(newTransfer.Title))
                 throw new InvalidRequestArgumentException("Transfer title cannot be null or empty.");
 
-            return dataLayer.CreateTransfer(newTransfer.ToAbstract()).ToWeb();
+            var createdTransfer = dataLayer.CreateTransfer(newTransfer.ToAbstract());
+
+            return CreatedAtAction("Get", new { id = createdTransfer.Id }, createdTransfer.ToWeb());
         }
 
         // DELETE api/transfers/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             dataLayer.DeleteTransfer(id);
+
+            return NoContent();
         }
 
         // GET api/transfers/5
@@ -68,14 +72,16 @@ namespace ExinServer.Web.Controllers
 
         // POST api/currencies
         [HttpPost]
-        public Transfer Update([FromBody]TransferUpdate transferUpdate)
+        public IActionResult Update([FromBody]TransferUpdate transferUpdate)
         {
             if (transferUpdate == null)
                 throw new InvalidRequestArgumentException("The transfer cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(transferUpdate.Title))
                 throw new InvalidRequestArgumentException("Transfer title cannot be null or empty.");
 
-            return dataLayer.UpdateTransfer(transferUpdate.ToAbstract()).ToWeb();
+            dataLayer.UpdateTransfer(transferUpdate.ToAbstract());
+
+            return NoContent();
         }
     }
 }

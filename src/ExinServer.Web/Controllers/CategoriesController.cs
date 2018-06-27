@@ -35,21 +35,25 @@ namespace ExinServer.Web.Controllers
 
         // PUT api/categories
         [HttpPut]
-        public Category Create([FromBody]NewCategory newCategory)
+        public IActionResult Create([FromBody]NewCategory newCategory)
         {
             if (newCategory == null)
                 throw new InvalidRequestArgumentException("The category cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(newCategory.Name))
                 throw new InvalidRequestArgumentException("Category name cannot be null or empty.");
 
-            return dataLayer.CreateCategory(newCategory.ToAbstract()).ToWeb();
+            var createdCategory = dataLayer.CreateCategory(newCategory.ToAbstract());
+
+            return CreatedAtAction("Get", new { id = createdCategory.Id }, createdCategory.ToWeb());
         }
 
         // DELETE api/categories/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             dataLayer.DeleteCategory(id);
+
+            return NoContent();
         }
 
         // GET api/categories/5
@@ -68,14 +72,16 @@ namespace ExinServer.Web.Controllers
 
         // POST api/categories
         [HttpPost]
-        public Category Update([FromBody]CategoryUpdate updatedCategory)
+        public IActionResult Update([FromBody]CategoryUpdate updatedCategory)
         {
             if (updatedCategory == null)
                 throw new InvalidRequestArgumentException("The category cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(updatedCategory.Name))
                 throw new InvalidRequestArgumentException("Category name cannot be null or empty.");
 
-            return dataLayer.UpdateCategory(updatedCategory.ToAbstract()).ToWeb();
+            dataLayer.UpdateCategory(updatedCategory.ToAbstract());
+
+            return NoContent();
         }
     }
 }

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExinServer.Data.Abstraction.Exceptions;
@@ -68,7 +67,7 @@ namespace ExinServer.Test.ControllerTests
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
-                category = controller.Create(newCategory);
+                category = controller.CreateCategory(newCategory);
 
             Assert.IsTrue(
                 category.Id > 0,
@@ -97,7 +96,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
             {
-                createdCategory = controller.Create(TestDataProvider.CreateNewCategory());
+                createdCategory = controller.CreateCategory(TestDataProvider.CreateNewCategory());
                 queriedCategory = controller.Get(createdCategory.Id);
                 controller.Delete(createdCategory.Id);
                 listedCategories = controller.List();
@@ -124,8 +123,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
             {
-                var newCategory = TestDataProvider.CreateNewCategory();
-                createdCategory = controller.Create(newCategory);
+                createdCategory = controller.CreateCategory(TestDataProvider.CreateNewCategory());
                 queriedCategory = controller.Get(createdCategory.Id);
             }
 
@@ -144,10 +142,8 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
             {
-                var newCategory1 = TestDataProvider.CreateNewCategory();
-                createdCategory1 = controller.Create(newCategory1);
-                var newCategory2 = TestDataProvider.CreateAnotherNewCategory();
-                createdCategory2 = controller.Create(newCategory2);
+                createdCategory1 = controller.CreateCategory(TestDataProvider.CreateNewCategory());
+                createdCategory2 = controller.CreateCategory(TestDataProvider.CreateAnotherNewCategory());
                 queriedCategories = controller.List();
             }
 
@@ -192,7 +188,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
             {
-                createdCategory = controller.Create(TestDataProvider.CreateNewCategory());
+                createdCategory = controller.CreateCategory(TestDataProvider.CreateNewCategory());
                 controller.Update(new CategoryUpdate(createdCategory.Id, "Cinema"));
                 updatedCategory = controller.Get(createdCategory.Id);
             }

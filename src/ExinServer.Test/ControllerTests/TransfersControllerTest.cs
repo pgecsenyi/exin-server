@@ -72,16 +72,16 @@ namespace ExinServer.Test.ControllerTests
             using (var partnersController = new PartnersController(dataLayer))
             using (var transfersController = new TransfersController(dataLayer))
             {
-                var category = categoriesController.Create(TestDataProvider.CreateNewCategory());
-                var partner = partnersController.Create(TestDataProvider.CreateAnotherNewPartner());
-                var currency = currenciesController.Create(TestDataProvider.CreateAnotherNewCurrency());
+                var category = categoriesController.CreateCategory(TestDataProvider.CreateNewCategory());
+                var partner = partnersController.CreatePartner(TestDataProvider.CreateAnotherNewPartner());
+                var currency = currenciesController.CreateCurrency(TestDataProvider.CreateAnotherNewCurrency());
 
                 newTransfer = TestDataProvider.CreateNewTransfer(
                     category.Id,
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                transfer = transfersController.Create(newTransfer);
+                transfer = transfersController.CreateTransfer(newTransfer);
             }
 
             Assert.AreEqual(newTransfer.CategoryId, transfer.Category.Id, "Unexpected category.");
@@ -122,16 +122,16 @@ namespace ExinServer.Test.ControllerTests
             using (var partnersController = new PartnersController(dataLayer))
             using (var transfersController = new TransfersController(dataLayer))
             {
-                var category = categoriesController.Create(TestDataProvider.CreateNewCategory());
-                var partner = partnersController.Create(TestDataProvider.CreateAnotherNewPartner());
-                var currency = currenciesController.Create(TestDataProvider.CreateAnotherNewCurrency());
+                var category = categoriesController.CreateCategory(TestDataProvider.CreateNewCategory());
+                var partner = partnersController.CreatePartner(TestDataProvider.CreateAnotherNewPartner());
+                var currency = currenciesController.CreateCurrency(TestDataProvider.CreateAnotherNewCurrency());
 
                 var newTransfer = TestDataProvider.CreateNewTransfer(
                     category.Id,
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                createdTransfer = transfersController.Create(newTransfer);
+                createdTransfer = transfersController.CreateTransfer(newTransfer);
 
                 queriedTransfer = transfersController.Get(createdTransfer.Id);
                 transfersController.Delete(createdTransfer.Id);
@@ -162,16 +162,16 @@ namespace ExinServer.Test.ControllerTests
             using (var partnersController = new PartnersController(dataLayer))
             using (var transfersController = new TransfersController(dataLayer))
             {
-                var category = categoriesController.Create(TestDataProvider.CreateAnotherNewCategory());
-                var partner = partnersController.Create(TestDataProvider.CreateAnotherNewPartner());
-                var currency = currenciesController.Create(TestDataProvider.CreateNewCurrency());
+                var category = categoriesController.CreateCategory(TestDataProvider.CreateNewCategory());
+                var partner = partnersController.CreatePartner(TestDataProvider.CreateAnotherNewPartner());
+                var currency = currenciesController.CreateCurrency(TestDataProvider.CreateNewCurrency());
 
                 var newTransfer = TestDataProvider.CreateNewTransfer(
                     category.Id,
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                createdTransfer = transfersController.Create(newTransfer);
+                createdTransfer = transfersController.CreateTransfer(newTransfer);
                 queriedTransfer = transfersController.Get(createdTransfer.Id);
             }
 
@@ -193,22 +193,22 @@ namespace ExinServer.Test.ControllerTests
             using (var partnersController = new PartnersController(dataLayer))
             using (var transfersController = new TransfersController(dataLayer))
             {
-                var category = categoriesController.Create(TestDataProvider.CreateNewCategory());
-                var partner = partnersController.Create(TestDataProvider.CreateNewPartner());
-                var currency = currenciesController.Create(TestDataProvider.CreateNewCurrency());
+                var category = categoriesController.CreateCategory(TestDataProvider.CreateNewCategory());
+                var partner = partnersController.CreatePartner(TestDataProvider.CreateNewPartner());
+                var currency = currenciesController.CreateCurrency(TestDataProvider.CreateNewCurrency());
 
                 var newTransfer1 = TestDataProvider.CreateNewTransfer(
                     category.Id,
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                createdTransfer1 = transfersController.Create(newTransfer1);
+                createdTransfer1 = transfersController.CreateTransfer(newTransfer1);
                 var newTransfer2 = TestDataProvider.CreateNewTransfer(
                     category.Id,
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                createdTransfer2 = transfersController.Create(newTransfer2);
+                createdTransfer2 = transfersController.CreateTransfer(newTransfer2);
                 queriedTransfers = transfersController.List();
             }
 
@@ -258,18 +258,18 @@ namespace ExinServer.Test.ControllerTests
             using (var partnersController = new PartnersController(dataLayer))
             using (var transfersController = new TransfersController(dataLayer))
             {
-                var category1 = categoriesController.Create(TestDataProvider.CreateNewCategory());
-                var partner = partnersController.Create(TestDataProvider.CreateNewPartner());
-                var currency = currenciesController.Create(TestDataProvider.CreateNewCurrency());
+                var category1 = categoriesController.CreateCategory(TestDataProvider.CreateNewCategory());
+                var partner = partnersController.CreatePartner(TestDataProvider.CreateNewPartner());
+                var currency = currenciesController.CreateCurrency(TestDataProvider.CreateAnotherNewCurrency());
 
-                category2 = categoriesController.Create(TestDataProvider.CreateAnotherNewCategory());
+                category2 = categoriesController.CreateCategory(TestDataProvider.CreateAnotherNewCategory());
 
                 var newTransfer = TestDataProvider.CreateNewTransfer(
                     category1.Id,
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateNewTransferItem());
-                createdTransfer = transfersController.Create(newTransfer);
+                createdTransfer = transfersController.CreateTransfer(newTransfer);
 
                 transferUpdate = TestDataProvider.CreateTransferUpdate(
                     createdTransfer.Id,
@@ -277,7 +277,8 @@ namespace ExinServer.Test.ControllerTests
                     partner.Id,
                     currency.Id,
                     TestDataProvider.CreateTransferItemUpdate(createdTransfer.Items[0].Id));
-                updatedTransfer = transfersController.Update(transferUpdate);
+                transfersController.Update(transferUpdate);
+                updatedTransfer = transfersController.Get(createdTransfer.Id);
             }
 
             // Note that EF Core behaves slightly differently when an in-memory database is used, these checks are not

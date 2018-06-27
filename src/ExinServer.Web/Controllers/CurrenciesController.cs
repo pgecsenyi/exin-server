@@ -35,21 +35,25 @@ namespace ExinServer.Web.Controllers
 
         // PUT api/currencies
         [HttpPut]
-        public Currency Create([FromBody]NewCurrency newCurrency)
+        public IActionResult Create([FromBody]NewCurrency newCurrency)
         {
             if (newCurrency == null)
                 throw new InvalidRequestArgumentException("The currency cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(newCurrency.Code))
                 throw new InvalidRequestArgumentException("Currency code cannot be null or empty.");
 
-            return dataLayer.CreateCurrency(newCurrency.ToAbstract()).ToWeb();
+            var createdCurrency = dataLayer.CreateCurrency(newCurrency.ToAbstract());
+
+            return CreatedAtAction("Get", new { id = createdCurrency.Id }, createdCurrency.ToWeb());
         }
 
         // DELETE api/currencies/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             dataLayer.DeleteCurrency(id);
+
+            return NoContent();
         }
 
         // GET api/currencies/5
@@ -68,14 +72,16 @@ namespace ExinServer.Web.Controllers
 
         // POST api/currencies
         [HttpPost]
-        public Currency Update([FromBody]CurrencyUpdate currencyUpdate)
+        public IActionResult Update([FromBody]CurrencyUpdate currencyUpdate)
         {
             if (currencyUpdate == null)
                 throw new InvalidRequestArgumentException("The currency cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(currencyUpdate.Code))
                 throw new InvalidRequestArgumentException("Currency code cannot be null or empty.");
 
-            return dataLayer.UpdateCurrency(currencyUpdate.ToAbstract()).ToWeb();
+            dataLayer.UpdateCurrency(currencyUpdate.ToAbstract());
+
+            return NoContent();
         }
     }
 }

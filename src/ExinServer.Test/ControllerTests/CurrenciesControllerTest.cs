@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExinServer.Data.Abstraction.Exceptions;
@@ -68,7 +67,7 @@ namespace ExinServer.Test.ControllerTests
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
-                currency = controller.Create(newCurrency);
+                currency = controller.CreateCurrency(newCurrency);
 
             Assert.IsTrue(
                 currency.Id > 0,
@@ -97,7 +96,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
             {
-                createdCurrency = controller.Create(TestDataProvider.CreateNewCurrency());
+                createdCurrency = controller.CreateCurrency(TestDataProvider.CreateNewCurrency());
                 queriedCurrency = controller.Get(createdCurrency.Id);
                 controller.Delete(createdCurrency.Id);
                 listedCurrencies = controller.List();
@@ -124,8 +123,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
             {
-                var newCurrency = TestDataProvider.CreateNewCurrency();
-                createdCurrency = controller.Create(newCurrency);
+                createdCurrency = controller.CreateCurrency(TestDataProvider.CreateNewCurrency());
                 queriedCurrency = controller.Get(createdCurrency.Id);
             }
 
@@ -144,10 +142,8 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
             {
-                var newCurrency1 = TestDataProvider.CreateNewCurrency();
-                queriedCurrency1 = controller.Create(newCurrency1);
-                var newCurrency2 = TestDataProvider.CreateAnotherNewCurrency();
-                queriedCurrency2 = controller.Create(newCurrency2);
+                queriedCurrency1 = controller.CreateCurrency(TestDataProvider.CreateNewCurrency());
+                queriedCurrency2 = controller.CreateCurrency(TestDataProvider.CreateAnotherNewCurrency());
                 queriedCurrencies = controller.List();
             }
 
@@ -192,7 +188,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
             {
-                createdCurrency = controller.Create(TestDataProvider.CreateNewCurrency());
+                createdCurrency = controller.CreateCurrency(TestDataProvider.CreateNewCurrency());
                 controller.Update(new CurrencyUpdate(createdCurrency.Id, "USD"));
                 updatedCurrency = controller.Get(createdCurrency.Id);
             }

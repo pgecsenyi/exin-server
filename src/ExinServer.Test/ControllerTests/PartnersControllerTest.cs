@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExinServer.Data.Abstraction.Exceptions;
@@ -68,7 +67,7 @@ namespace ExinServer.Test.ControllerTests
 
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
-                partner = controller.Create(newPartner);
+                partner = controller.CreatePartner(newPartner);
 
             Assert.IsTrue(
                 partner.Id > 0,
@@ -101,7 +100,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
             {
-                createdPartner = controller.Create(TestDataProvider.CreateNewPartner());
+                createdPartner = controller.CreatePartner(TestDataProvider.CreateNewPartner());
                 queriedPartner = controller.Get(createdPartner.Id);
                 controller.Delete(createdPartner.Id);
                 listedPartners = controller.List();
@@ -128,8 +127,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
             {
-                var newPartner = TestDataProvider.CreateNewPartner();
-                createdPartner = controller.Create(newPartner);
+                createdPartner = controller.CreatePartner(TestDataProvider.CreateNewPartner());
                 queriedPartner = controller.Get(createdPartner.Id);
             }
 
@@ -148,8 +146,8 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
             {
-                createdPartner1 = controller.Create(TestDataProvider.CreateNewPartner());
-                createdPartner2 = controller.Create(TestDataProvider.CreateAnotherNewPartner());
+                createdPartner1 = controller.CreatePartner(TestDataProvider.CreateNewPartner());
+                createdPartner2 = controller.CreatePartner(TestDataProvider.CreateAnotherNewPartner());
                 queriedPartners = controller.List();
             }
 
@@ -194,7 +192,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
             {
-                createdPartner = controller.Create(TestDataProvider.CreateNewPartner());
+                createdPartner = controller.CreatePartner(TestDataProvider.CreateNewPartner());
                 controller.Update(new PartnerUpdate(createdPartner.Id, "Eleanor Rigby", "Liverpool"));
                 updatedPartner = controller.Get(createdPartner.Id);
             }

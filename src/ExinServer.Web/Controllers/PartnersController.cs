@@ -35,21 +35,25 @@ namespace ExinServer.Web.Controllers
 
         // PUT api/partners
         [HttpPut]
-        public Partner Create([FromBody]NewPartner newPartner)
+        public IActionResult Create([FromBody]NewPartner newPartner)
         {
             if (newPartner == null)
                 throw new InvalidRequestArgumentException("The partner cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(newPartner.Name))
                 throw new InvalidRequestArgumentException("Partner name cannot be null or empty.");
 
-            return dataLayer.CreatePartner(newPartner.ToAbstract()).ToWeb();
+            var createdPartner = dataLayer.CreatePartner(newPartner.ToAbstract());
+
+            return CreatedAtAction("Get", new { id = createdPartner.Id }, createdPartner.ToWeb());
         }
 
         // DELETE api/partners/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             dataLayer.DeletePartner(id);
+
+            return NoContent();
         }
 
         // GET api/partners/5
@@ -68,14 +72,16 @@ namespace ExinServer.Web.Controllers
 
         // POST api/partners
         [HttpPost]
-        public Partner Update([FromBody]PartnerUpdate partnerUpdate)
+        public IActionResult Update([FromBody]PartnerUpdate partnerUpdate)
         {
             if (partnerUpdate == null)
                 throw new InvalidRequestArgumentException("The partner cannot be null or empty.");
             if (string.IsNullOrWhiteSpace(partnerUpdate.Name))
                 throw new InvalidRequestArgumentException("Partner name cannot be null or empty.");
 
-            return dataLayer.UpdatePartner(partnerUpdate.ToAbstract()).ToWeb();
+            dataLayer.UpdatePartner(partnerUpdate.ToAbstract());
+
+            return NoContent();
         }
     }
 }
