@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <CodeAnalysisRuleSet>$(SolutionDir)\StyleCopRules.ruleset</CodeAnalysisRuleSet>
-    <OutputPath>..\..\build\bin</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

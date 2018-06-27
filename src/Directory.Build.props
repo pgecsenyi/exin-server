@@ -1,5 +1,7 @@
 <Project>
   <PropertyGroup>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)\..\build\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <CodeAnalysisRuleSet>$(SolutionDir)\StyleCopRules.ruleset</CodeAnalysisRuleSet>
+    <OutputPath>..\..\build\bin</OutputPath>
   </PropertyGroup>
 </Project>
