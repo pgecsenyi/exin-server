@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ExinServer.Web
 {
@@ -35,8 +36,13 @@ namespace ExinServer.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDataLayer dataLayer)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env,
+            ILoggerFactory loggerFactory,
+            IDataLayer dataLayer)
         {
+            ConfigureLogging(loggerFactory);
             ConfigureDevelopmentEnvironment(app, env);
             dataLayer.EnsureCreated();
             ConfigureExceptionHandling(app);
@@ -49,6 +55,14 @@ namespace ExinServer.Web
         {
             ConfigureDataService(services);
             services.AddMvc();
+        }
+
+        private void ConfigureLogging(ILoggerFactory loggerFactory)
+        {
+            var loggingSettings = Configuration.GetSection("Logging");
+            var filename = loggingSettings.GetValue("Filename", string.Empty);
+            if (!string.IsNullOrWhiteSpace(filename))
+                loggerFactory.AddFile(filename);
         }
 
         private void ConfigureDevelopmentEnvironment(IApplicationBuilder app, IHostingEnvironment env)

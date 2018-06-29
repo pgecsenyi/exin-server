@@ -31,20 +31,24 @@ namespace ExinServer.Web
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    var env = hostingContext.HostingEnvironment;
-                    config
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                        .AddEnvironmentVariables();
-                })
-                .ConfigureLogging((hostingContext, logging) =>
-                {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    logging.AddConsole();
-                    logging.AddDebug();
-                })
+                .ConfigureAppConfiguration(ConfigureConfiguration)
+                .ConfigureLogging(ConfigureLogging)
                 .Build();
+
+        private static void ConfigureConfiguration(WebHostBuilderContext hostingContext, IConfigurationBuilder config)
+        {
+            var env = hostingContext.HostingEnvironment;
+            config
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+        }
+
+        private static void ConfigureLogging(WebHostBuilderContext hostingContext, ILoggingBuilder logging)
+        {
+            logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+            logging.AddConsole();
+            logging.AddDebug();
+        }
     }
 }

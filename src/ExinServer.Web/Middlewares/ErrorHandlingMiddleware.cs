@@ -30,11 +30,10 @@ namespace ExinServer.Web.Middlewares
         private readonly ILogger logger;
         private readonly RequestDelegate next;
 
-        public ErrorHandlingMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+        public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger = null)
         {
             this.next = next;
-
-            logger = loggerFactory.CreateLogger<ErrorHandlingMiddleware>();
+            this.logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -58,7 +57,7 @@ namespace ExinServer.Web.Middlewares
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
 
-            logger.LogWarning(exception, $"Returning HTTP code {code}.");
+            logger?.LogWarning(exception, $"Returning HTTP code {code}.");
 
             return context.Response.WriteAsync(result);
         }
