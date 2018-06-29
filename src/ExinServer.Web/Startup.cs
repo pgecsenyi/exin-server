@@ -35,10 +35,10 @@ namespace ExinServer.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDataLayer dataLayer)
         {
             ConfigureDevelopmentEnvironment(app, env);
-            EnsureDatabaseCreated(app);
+            dataLayer.EnsureCreated();
             ConfigureExceptionHandling(app);
 
             app.UseMvc();
@@ -55,12 +55,6 @@ namespace ExinServer.Web
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-        }
-
-        private void EnsureDatabaseCreated(IApplicationBuilder app)
-        {
-            var databaseService = app.ApplicationServices.GetService<IDataLayer>();
-            databaseService.EnsureCreated();
         }
 
         private void ConfigureExceptionHandling(IApplicationBuilder app)
