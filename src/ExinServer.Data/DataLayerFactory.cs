@@ -26,24 +26,24 @@ namespace ExinServer.Data
             switch (configuration.Type)
             {
                 case DatabaseType.Sqlite:
-                    return CreateSqliteLayer(configuration.Path);
+                    return CreateSqliteLayer(configuration.ConnectionString);
                 case DatabaseType.SqliteMemory:
-                    return CreateSqliteMemoryLayer(configuration.Path);
+                    return CreateSqliteMemoryLayer();
                 default:
                     throw new ApplicationException("Invalid database configuration.");
             }
         }
 
-        private static IDataLayer CreateSqliteLayer(string path)
+        private static IDataLayer CreateSqliteLayer(string connectionString)
         {
-            var sqliteConfiguration = new ExinServer.Data.Sqlite.SqliteDatabaseConfiguration(path);
+            var sqliteConfiguration = new ExinServer.Data.Sqlite.SqliteDatabaseConfiguration(connectionString);
 
             return new ExinServer.Data.Sqlite.SqliteDataLayer(sqliteConfiguration);
         }
 
-        private static IDataLayer CreateSqliteMemoryLayer(string path)
+        private static IDataLayer CreateSqliteMemoryLayer()
         {
-            var sqliteConfiguration = new ExinServer.Data.Sqlite.SqliteDatabaseConfiguration();
+            var sqliteConfiguration = new ExinServer.Data.Sqlite.SqliteDatabaseConfiguration("DataSource=:memory:");
 
             return new ExinServer.Data.Sqlite.SqliteDataLayer(sqliteConfiguration);
         }

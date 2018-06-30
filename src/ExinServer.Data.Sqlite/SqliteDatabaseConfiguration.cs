@@ -20,24 +20,16 @@ namespace ExinServer.Data.Sqlite
 {
     public class SqliteDatabaseConfiguration
     {
-        private readonly bool inMemory;
-        private readonly string path;
+        private readonly string connectionString;
 
-        public SqliteDatabaseConfiguration()
+        public SqliteDatabaseConfiguration(string connectionString)
         {
-            inMemory = true;
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new ArgumentNullException(connectionString);
+
+            this.connectionString = connectionString;
         }
 
-        public SqliteDatabaseConfiguration(string path)
-        {
-            if (string.IsNullOrWhiteSpace(path))
-                throw new ArgumentNullException(path);
-
-            this.path = path;
-        }
-
-        public bool InMemory => inMemory;
-
-        public string Path => path;
+        public string ConnectionString => connectionString;
     }
 }

@@ -51,16 +51,9 @@ namespace ExinServer.Data.Sqlite
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (configuration.InMemory)
-            {
-                connection = new SqliteConnection("DataSource=:memory:");
-                connection.Open();
-                optionsBuilder.UseSqlite(connection);
-            }
-            else
-            {
-                optionsBuilder.UseSqlite("Filename=" + configuration.Path);
-            }
+            connection = new SqliteConnection(configuration.ConnectionString);
+            connection.Open();
+            optionsBuilder.UseSqlite(connection);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

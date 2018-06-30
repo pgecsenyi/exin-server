@@ -79,22 +79,27 @@ namespace ExinServer.Web
         private void ConfigureDataService(IServiceCollection services)
         {
             var databaseSettings = Configuration.GetSection("Database");
-            var type = databaseSettings.GetValue("Type", "SQLite");
-            var path = databaseSettings.GetValue("Path", "MyDatabase.db");
+            var type = databaseSettings.GetValue("Type", string.Empty);
+            var connectionString = databaseSettings.GetValue("ConnectionString", string.Empty);
 
-            var databaseType = DetermineDatabaseType(type);
-            var configuration = new DatabaseConfiguration(databaseType, path);
+            var databaseType = DetermineDatabaseType(type, connectionString);
+            var configuration = new DatabaseConfiguration(databaseType, connectionString);
 
             services.AddScoped<IDataLayer>(provider => DataLayerFactory.CreateDataLayer(configuration));
         }
 
-        private DatabaseType DetermineDatabaseType(string type)
+        private DatabaseType DetermineDatabaseType(string type, string connectionString)
         {
-            DatabaseType result;
-            if (Enum.TryParse(type, true, out result))
-                return result;
+            if (string.IsNullOrWhiteSpace(type))
+                throw new ApplicationException("Database type is not specified.");
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new ApplicationException("Connection string is not specified.");
 
-            return DatabaseType.Sqlite;
+            DatabaseType result;
+            if (!Enum.TryParse(type, true, out result))
+                throw new ApplicationException("Invalid database type.");
+
+            return result;
         }
     }
 }

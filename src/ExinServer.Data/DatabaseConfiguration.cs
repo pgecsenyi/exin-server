@@ -18,16 +18,16 @@ namespace ExinServer.Data
 {
     public class DatabaseConfiguration
     {
-        private readonly string path;
+        private readonly string connectionString;
         private readonly DatabaseType type;
 
-        public DatabaseConfiguration(DatabaseType type, string path = null)
+        public DatabaseConfiguration(DatabaseType type, string connectionString = null)
         {
             this.type = type;
-            this.path = path;
+            this.connectionString = connectionString;
         }
 
-        public string Path => path;
+        public string ConnectionString => connectionString;
 
         public DatabaseType Type => type;
     }
