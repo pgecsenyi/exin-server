@@ -42,19 +42,39 @@ namespace ExinServer.Web
             ILoggerFactory loggerFactory,
             IDataLayer dataLayer)
         {
-            ConfigureLogging(loggerFactory);
-            ConfigureDevelopmentEnvironment(app, env);
-            dataLayer.EnsureCreated();
-            ConfigureExceptionHandling(app);
+            ILogger logger = null;
 
-            app.UseMvc();
+            try
+            {
+                logger = loggerFactory.CreateLogger<Startup>();
+
+                ConfigureLogging(loggerFactory);
+                ConfigureDevelopmentEnvironment(app, env);
+                dataLayer.EnsureCreated();
+                app.UseMiddleware<ErrorHandlingMiddleware>();
+                app.UseMvc();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Failed to start the application. " + exception.Message);
+                logger?.LogCritical(exception, "Failed to start the application.");
+                throw exception;
+            }
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureDataService(services);
-            services.AddMvc();
+            try
+            {
+                ConfigureDataService(services);
+                services.AddMvc();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Failed to start the application. " + exception.Message);
+                throw exception;
+            }
         }
 
         private void ConfigureLogging(ILoggerFactory loggerFactory)
@@ -69,11 +89,6 @@ namespace ExinServer.Web
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-        }
-
-        private void ConfigureExceptionHandling(IApplicationBuilder app)
-        {
-            app.UseMiddleware<ErrorHandlingMiddleware>();
         }
 
         private void ConfigureDataService(IServiceCollection services)
