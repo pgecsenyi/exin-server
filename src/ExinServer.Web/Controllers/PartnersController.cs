@@ -33,8 +33,8 @@ namespace ExinServer.Web.Controllers
             this.dataLayer = dataLayer;
         }
 
-        // PUT api/partners
-        [HttpPut]
+        // POST api/partners
+        [HttpPost]
         public IActionResult Create([FromBody]NewPartner newPartner)
         {
             if (newPartner == null)
@@ -70,8 +70,8 @@ namespace ExinServer.Web.Controllers
             return dataLayer.ListPartners().ToWeb();
         }
 
-        // POST api/partners
-        [HttpPost]
+        // PUT api/partners
+        [HttpPut]
         public IActionResult Update([FromBody]PartnerUpdate partnerUpdate)
         {
             if (partnerUpdate == null)

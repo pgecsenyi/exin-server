@@ -33,8 +33,8 @@ namespace ExinServer.Web.Controllers
             this.dataLayer = dataLayer;
         }
 
-        // PUT api/currencies
-        [HttpPut]
+        // POST api/currencies
+        [HttpPost]
         public IActionResult Create([FromBody]NewCurrency newCurrency)
         {
             if (newCurrency == null)
@@ -70,8 +70,8 @@ namespace ExinServer.Web.Controllers
             return dataLayer.ListCurrencies().ToWeb();
         }
 
-        // POST api/currencies
-        [HttpPost]
+        // PUT api/currencies
+        [HttpPut]
         public IActionResult Update([FromBody]CurrencyUpdate currencyUpdate)
         {
             if (currencyUpdate == null)

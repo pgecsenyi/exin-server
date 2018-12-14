@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-02-12T20:26:10.225Z",
+	"__export_date": "2018-12-14T20:40:08.693Z",
 	"__export_source": "insomnia.desktop.app:v5.11.7",
 	"resources": [
 		{
@@ -82,12 +82,12 @@
 		{
 			"_id": "req_058f1b036620420d973d09ece807111b",
 			"parentId": "fld_7c37c76597a1403d9a6474eda2624a63",
-			"modified": 1518114778669,
+			"modified": 1544819968945,
 			"created": 1517954484772,
 			"url": "{{base_url}}api/partners",
 			"name": "Create",
 			"description": "",
-			"method": "PUT",
+			"method": "POST",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"name\": \"Snack Shop\",\n\t\"address\": \"Sweet Street 2.\"\n}"
@@ -171,12 +171,12 @@
 		{
 			"_id": "req_312fdb8adaa844e8980273b287b2e587",
 			"parentId": "fld_7c37c76597a1403d9a6474eda2624a63",
-			"modified": 1518466121056,
+			"modified": 1544819972712,
 			"created": 1518466082362,
 			"url": "{{base_url}}api/partners",
 			"name": "Update",
 			"description": "",
-			"method": "POST",
+			"method": "PUT",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"id\": 1,\n\t\"name\": \"Nowhere Man\",\n\t\"address\": \"Nowhere Land\"\n}"
@@ -200,12 +200,12 @@
 		{
 			"_id": "req_7a4bfd3b94c14140b51f4627a1e8d584",
 			"parentId": "fld_d420e706b95341b080eedf98dd802160",
-			"modified": 1518119451325,
+			"modified": 1544819949478,
 			"created": 1518119389024,
 			"url": "{{base_url}}api/categories",
 			"name": "Create",
 			"description": "",
-			"method": "PUT",
+			"method": "POST",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"name\": \"Food\"\n}"
@@ -289,12 +289,12 @@
 		{
 			"_id": "req_16176da5f17d4e68bc4fa9be8132090f",
 			"parentId": "fld_d420e706b95341b080eedf98dd802160",
-			"modified": 1518466075925,
+			"modified": 1544819957130,
 			"created": 1518459806139,
 			"url": "{{base_url}}api/categories",
 			"name": "Update",
 			"description": "",
-			"method": "POST",
+			"method": "PUT",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"id\": 1,\n\t\"name\": \"Cinema\"\n}"
@@ -318,12 +318,12 @@
 		{
 			"_id": "req_f867733983f84328a85a8b7ac19b3534",
 			"parentId": "fld_a24de315b5734af7bb2378e030f75a92",
-			"modified": 1518119862009,
+			"modified": 1544819961995,
 			"created": 1518119837576,
 			"url": "{{base_url}}api/currencies",
 			"name": "Create",
 			"description": "",
-			"method": "PUT",
+			"method": "POST",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"code\": \"EUR\"\n}"
@@ -407,12 +407,12 @@
 		{
 			"_id": "req_ae7c4d30ae694e39a66e589c540a6144",
 			"parentId": "fld_a24de315b5734af7bb2378e030f75a92",
-			"modified": 1518466066570,
+			"modified": 1544819965262,
 			"created": 1518466037778,
 			"url": "{{base_url}}api/currencies",
 			"name": "Update",
 			"description": "",
-			"method": "POST",
+			"method": "PUT",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"id\": 1,\n\t\"code\": \"USD\"\n}"
@@ -436,12 +436,12 @@
 		{
 			"_id": "req_c2a139a032104f84bec5d5883780e161",
 			"parentId": "fld_6a42795237be414eaed50ac434bae239",
-			"modified": 1518296950428,
+			"modified": 1544819976035,
 			"created": 1518119910478,
 			"url": "{{base_url}}api/transfers",
 			"name": "Create",
 			"description": "",
-			"method": "PUT",
+			"method": "POST",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"categoryId\": 1,\n\t\"partnerId\": 1,\n\t\"currencyId\": 1,\n\t\"title\": \"Buy soup for dinner\",\n\t\"time\": \"2017-01-25T12:30:05Z\",\n\t\"discount\": 0.1,\n\t\"note\": \"Great place, should definitely visit it again.\",\n\t\"items\": [\n\t\t{\n\t\t\t\"name\": \"Cheese soup\",\n\t\t\t\"price\": 1.5,\n\t\t\t\"discount\": 0\n\t\t}\n\t]\n}"
@@ -525,12 +525,12 @@
 		{
 			"_id": "req_203cb9b53ecd4352ace51b668c94e66f",
 			"parentId": "fld_6a42795237be414eaed50ac434bae239",
-			"modified": 1518466982065,
+			"modified": 1544819980659,
 			"created": 1518466702210,
 			"url": "{{base_url}}api/transfers",
 			"name": "Update",
 			"description": "",
-			"method": "POST",
+			"method": "PUT",
 			"body": {
 				"mimeType": "application/json",
 				"text": "{\n\t\"id\": 1,\n\t\"categoryId\": 1,\n\t\"partnerId\": 1,\n\t\"currencyId\": 1,\n\t\"title\": \"Dinner\",\n\t\"time\": \"2017-01-25T12:30:05Z\",\n\t\"discount\": 0.1,\n\t\"note\": \"Good place.\",\n\t\"items\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"Fish soup\",\n\t\t\t\"price\": 1.5,\n\t\t\t\"discount\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"Service fee\",\n\t\t\t\"price\": 1,\n\t\t\t\"discount\": 0\n\t\t}\n\t]\n}"

@@ -33,8 +33,8 @@ namespace ExinServer.Web.Controllers
             this.dataLayer = dataLayer;
         }
 
-        // PUT api/categories
-        [HttpPut]
+        // POST api/categories
+        [HttpPost]
         public IActionResult Create([FromBody]NewCategory newCategory)
         {
             if (newCategory == null)
@@ -70,8 +70,8 @@ namespace ExinServer.Web.Controllers
             return dataLayer.ListCategories().ToWeb();
         }
 
-        // POST api/categories
-        [HttpPost]
+        // PUT api/categories
+        [HttpPut]
         public IActionResult Update([FromBody]CategoryUpdate updatedCategory)
         {
             if (updatedCategory == null)
