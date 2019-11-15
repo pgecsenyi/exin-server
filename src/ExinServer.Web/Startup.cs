@@ -19,9 +19,9 @@ using ExinServer.Data;
 using ExinServer.Data.Abstraction;
 using ExinServer.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace ExinServer.Web
@@ -38,7 +38,7 @@ namespace ExinServer.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
-            IHostingEnvironment env,
+            IHostEnvironment env,
             ILoggerFactory loggerFactory,
             IDataLayer dataLayer)
         {
@@ -52,7 +52,11 @@ namespace ExinServer.Web
                 ConfigureDevelopmentEnvironment(app, env);
                 dataLayer.EnsureCreated();
                 app.UseMiddleware<ErrorHandlingMiddleware>();
-                app.UseMvc();
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                    {
+                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                    });
             }
             catch (Exception exception)
             {
@@ -68,7 +72,8 @@ namespace ExinServer.Web
             try
             {
                 ConfigureDataService(services);
-                services.AddMvc();
+                services.AddControllers().AddNewtonsoftJson();
+                services.AddRouting();
             }
             catch (Exception exception)
             {
@@ -85,7 +90,7 @@ namespace ExinServer.Web
                 loggerFactory.AddFile(filename);
         }
 
-        private void ConfigureDevelopmentEnvironment(IApplicationBuilder app, IHostingEnvironment env)
+        private void ConfigureDevelopmentEnvironment(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();

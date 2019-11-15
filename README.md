@@ -17,7 +17,7 @@ You can also run the application directly by issuing the following commands.
 
 ## Installation and usage
 
-After building the solution, copy the DLL files from the `build/bin/netcoreapp2.2` directory together with `src/ExinServer.Web/appsettings.json` to the location of your choice and execute the application using the command below. (You may want to configure the path of the database file in `appsettings.json` first.)
+After building the solution, copy the DLL files from the `build/bin/netcoreapp3.0` directory together with `src/ExinServer.Web/appsettings.json` to the location of your choice and execute the application using the command below. (You may want to configure the path of the database file in `appsettings.json` first.)
 
     dotnet ExinServer.Web.dll
 
@@ -25,7 +25,7 @@ You can also use _Visual Studio Code_ to debug the application.
 
 ## Development Environment
 
-  * Ubuntu 17.10
-  * .NET Core 2.2.101
-  * Visual Studio Code 1.28.2
-    * Extension: C# 1.17.1
+  * Windows 10
+  * .NET Core 3.0
+  * Visual Studio Code 1.40.1
+    * Extension: C# 1.21.7
