@@ -15,11 +15,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ExinServer.Data.Abstraction;
 using ExinServer.Data.Abstraction.Exceptions;
-using ExinServer.Data.Sqlite.Entities;
 using ExinServer.Data.Sqlite.EntityExtensions;
 using Microsoft.EntityFrameworkCore;
 using AbstractEntities = ExinServer.Data.Abstraction.Entities;

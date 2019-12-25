@@ -17,7 +17,6 @@
 using System.Linq;
 using ExinServer.Data.Abstraction.Exceptions;
 using ExinServer.Data.Sqlite.Entities;
-using ExinServer.Data.Sqlite.EntityExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExinServer.Data.Sqlite
