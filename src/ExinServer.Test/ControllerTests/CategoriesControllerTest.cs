@@ -44,7 +44,7 @@ namespace ExinServer.Test.ControllerTests
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
-                controller.Create(new NewCategory(null));
+                controller.Create(new NewCategory { Name = null });
         }
 
         [TestMethod]
@@ -171,7 +171,7 @@ namespace ExinServer.Test.ControllerTests
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
-                controller.Update(new CategoryUpdate(1, null));
+                controller.Update(new CategoryUpdate { Id = 1, Name = null });
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CategoriesController(dataLayer))
             {
-                var categoryUpdate = new CategoryUpdate(1, "Cinema");
+                var categoryUpdate = new CategoryUpdate { Id = 1, Name = "Cinemae" };
                 controller.Update(categoryUpdate);
             }
         }
@@ -195,7 +195,7 @@ namespace ExinServer.Test.ControllerTests
             using (var controller = new CategoriesController(dataLayer))
             {
                 createdCategory = controller.CreateCategory(TestDataProvider.CreateNewCategory());
-                controller.Update(new CategoryUpdate(createdCategory.Id, "Cinema"));
+                controller.Update(new CategoryUpdate { Id = createdCategory.Id, Name = "Cinema" });
                 updatedCategory = controller.Get(createdCategory.Id);
             }
 

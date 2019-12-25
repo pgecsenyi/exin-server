@@ -18,45 +18,20 @@ namespace ExinServer.Web.Entities
 {
     public class Currency
     {
-        private readonly string code;
-        private readonly int id;
+        public string Code { get; set; }
 
-        public Currency(int id, string code)
-        {
-            this.id = id;
-            this.code = code;
-        }
-
-        public string Code => code;
-
-        public int Id => id;
+        public int Id { get; set; }
     }
 
     public class NewCurrency
     {
-        private readonly string code;
-
-        public NewCurrency(string code)
-        {
-            this.code = code;
-        }
-
-        public string Code => code;
+        public string Code { get; set; }
     }
 
     public class CurrencyUpdate
     {
-        private readonly string code;
-        private readonly int id;
+        public string Code { get; set; }
 
-        public CurrencyUpdate(int id, string code)
-        {
-            this.id = id;
-            this.code = code;
-        }
-
-        public string Code => code;
-
-        public int Id => id;
+        public int Id { get; set; }
     }
 }

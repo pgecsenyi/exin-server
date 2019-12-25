@@ -18,69 +18,32 @@ namespace ExinServer.Web.Entities
 {
     public class TransferItem
     {
-        private readonly decimal discount;
-        private readonly int id;
-        private readonly string name;
-        private readonly decimal price;
+        public decimal Discount { get; set; }
 
-        public TransferItem(int id, string name, decimal price, decimal discount)
-        {
-            this.id = id;
-            this.name = name;
-            this.price = price;
-            this.discount = discount;
-        }
+        public int Id { get; set; }
 
-        public decimal Discount => discount;
+        public string Name { get; set; }
 
-        public int Id => id;
-
-        public string Name => name;
-
-        public decimal Price => price;
+        public decimal Price { get; set; }
     }
 
     public class NewTransferItem
     {
-        private readonly decimal discount;
-        private readonly string name;
-        private readonly decimal price;
+        public decimal Discount { get; set; }
 
-        public NewTransferItem(string name, decimal price, decimal discount)
-        {
-            this.name = name;
-            this.price = price;
-            this.discount = discount;
-        }
+        public string Name { get; set; }
 
-        public decimal Discount => discount;
-
-        public string Name => name;
-
-        public decimal Price => price;
+        public decimal Price { get; set; }
     }
 
     public class TransferItemUpdate
     {
-        private readonly decimal discount;
-        private readonly int id;
-        private readonly string name;
-        private readonly decimal price;
+        public decimal Discount { get; set; }
 
-        public TransferItemUpdate(int id, string name, decimal price, decimal discount)
-        {
-            this.id = id;
-            this.name = name;
-            this.price = price;
-            this.discount = discount;
-        }
+        public int Id { get; set; }
 
-        public decimal Discount => discount;
+        public string Name { get; set; }
 
-        public int Id => id;
-
-        public string Name => name;
-
-        public decimal Price => price;
+        public decimal Price { get; set; }
     }
 }

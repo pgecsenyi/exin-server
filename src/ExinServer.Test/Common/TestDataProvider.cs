@@ -23,32 +23,32 @@ namespace ExinServer.Test.Common
     {
         public static NewCategory CreateNewCategory()
         {
-            return new NewCategory("Food");
+            return new NewCategory { Name = "Food" };
         }
 
         public static NewCategory CreateAnotherNewCategory()
         {
-            return new NewCategory("Cinema");
+            return new NewCategory { Name = "Cinema" };
         }
 
         public static NewCurrency CreateNewCurrency()
         {
-            return new NewCurrency("EUR");
+            return new NewCurrency { Code = "EUR" };
         }
 
         public static NewCurrency CreateAnotherNewCurrency()
         {
-            return new NewCurrency("USD");
+            return new NewCurrency { Code = "USD" };
         }
 
         public static NewPartner CreateNewPartner()
         {
-            return new NewPartner("Nowhere Man", "Nowhere Land");
+            return new NewPartner { Name = "Nowhere Man", Address = "Nowhere Land" };
         }
 
         public static NewPartner CreateAnotherNewPartner()
         {
-            return new NewPartner("Elenaor Rigby", "Liverpool");
+            return new NewPartner { Name = "Elenaor Rigby", Address = "Liverpool" };
         }
 
         public static NewTransfer CreateNewTransfer(
@@ -57,15 +57,17 @@ namespace ExinServer.Test.Common
             int currencyId,
             params NewTransferItem[] items)
         {
-            return new NewTransfer(
-                categoryId: categoryId,
-                partnerId: partnerId,
-                currencyId: currencyId,
-                title: "Cottege cheese pasta",
-                time: DateTime.UtcNow,
-                discount: 0,
-                note: "Delicious.",
-                items: items);
+            return new NewTransfer
+            {
+                CategoryId = categoryId,
+                PartnerId = partnerId,
+                CurrencyId = currencyId,
+                Title = "Cottege cheese pasta",
+                Time = DateTime.UtcNow,
+                Discount = 0,
+                Note = "Delicious.",
+                Items = items,
+            };
         }
 
         public static TransferUpdate CreateTransferUpdate(
@@ -75,26 +77,28 @@ namespace ExinServer.Test.Common
             int currencyId,
             params TransferItemUpdate[] items)
         {
-            return new TransferUpdate(
-                id: transferId,
-                categoryId: categoryId,
-                partnerId: partnerId,
-                currencyId: currencyId,
-                title: "Lasagne",
-                time: DateTime.UtcNow,
-                discount: 0.1M,
-                note: null,
-                items: items);
+            return new TransferUpdate
+            {
+                Id = transferId,
+                CategoryId = categoryId,
+                PartnerId = partnerId,
+                CurrencyId = currencyId,
+                Title = "Lasagne",
+                Time = DateTime.UtcNow,
+                Discount = 0.1M,
+                Note = null,
+                Items = items,
+            };
         }
 
         public static NewTransferItem CreateNewTransferItem()
         {
-            return new NewTransferItem("Gum", 0.9M, 0.2M);
+            return new NewTransferItem { Name = "Gum", Price = 0.9M, Discount = 0.2M };
         }
 
         public static TransferItemUpdate CreateTransferItemUpdate(int id)
         {
-            return new TransferItemUpdate(id, "Bread", 1.0M, 0);
+            return new TransferItemUpdate { Id = id, Name = "Bread", Price = 1.0M, Discount = 0 };
         }
     }
 }

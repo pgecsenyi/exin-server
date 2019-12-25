@@ -18,57 +18,26 @@ namespace ExinServer.Web.Entities
 {
     public class Partner
     {
-        private readonly string address;
-        private readonly int id;
-        private readonly string name;
+        public string Address { get; set; }
 
-        public Partner(int id, string name, string address)
-        {
-            this.id = id;
-            this.name = name;
-            this.address = address;
-        }
+        public int Id { get; set; }
 
-        public string Address => address;
-
-        public int Id => id;
-
-        public string Name => name;
+        public string Name { get; set; }
     }
 
     public class NewPartner
     {
-        private readonly string address;
-        private readonly string name;
+        public string Address { get; set; }
 
-        public NewPartner(string name, string address)
-        {
-            this.name = name;
-            this.address = address;
-        }
-
-        public string Address => address;
-
-        public string Name => name;
+        public string Name { get; set; }
     }
 
     public class PartnerUpdate
     {
-        private readonly string address;
-        private readonly int id;
-        private readonly string name;
+        public string Address { get; set; }
 
-        public PartnerUpdate(int id, string name, string address)
-        {
-            this.id = id;
-            this.name = name;
-            this.address = address;
-        }
+        public int Id { get; set; }
 
-        public string Address => address;
-
-        public int Id => id;
-
-        public string Name => name;
+        public string Name { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace ExinServer.Test.ControllerTests
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
-                controller.Create(new NewPartner(null, null));
+                controller.Create(new NewPartner { Name = null, Address = null });
         }
 
         [TestMethod]
@@ -175,7 +175,7 @@ namespace ExinServer.Test.ControllerTests
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
-                controller.Update(new PartnerUpdate(1, null, null));
+                controller.Update(new PartnerUpdate { Id = 1, Name = null, Address = null });
         }
 
         [TestMethod]
@@ -185,7 +185,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new PartnersController(dataLayer))
             {
-                var partnerUpdate = new PartnerUpdate(1, "Nowhere Man", "Nowhere Land");
+                var partnerUpdate = new PartnerUpdate { Id = 1, Name = "Nowhere Man", Address = "Nowhere Land" };
                 controller.Update(partnerUpdate);
             }
         }
@@ -199,7 +199,7 @@ namespace ExinServer.Test.ControllerTests
             using (var controller = new PartnersController(dataLayer))
             {
                 createdPartner = controller.CreatePartner(TestDataProvider.CreateNewPartner());
-                controller.Update(new PartnerUpdate(createdPartner.Id, "Eleanor Rigby", "Liverpool"));
+                controller.Update(new PartnerUpdate { Id = createdPartner.Id, Name = "Eleanor Rigby", Address = "Liverpool" });
                 updatedPartner = controller.Get(createdPartner.Id);
             }
 

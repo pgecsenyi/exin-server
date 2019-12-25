@@ -20,155 +20,62 @@ namespace ExinServer.Web.Entities
 {
     public class Transfer
     {
-        private readonly Category category;
-        private readonly Currency currency;
-        private readonly decimal discount;
-        private readonly int id;
-        private readonly TransferItem[] items;
-        private readonly string note;
-        private readonly Partner partner;
-        private readonly DateTime time;
-        private readonly string title;
+        public Category Category { get; set; }
 
-        public Transfer(
-            int id,
-            Category category,
-            Partner partner,
-            Currency currency,
-            string title,
-            DateTime time,
-            decimal discount,
-            string note,
-            TransferItem[] items)
-        {
-            this.id = id;
-            this.category = category;
-            this.partner = partner;
-            this.currency = currency;
-            this.title = title;
-            this.time = time;
-            this.discount = discount;
-            this.note = note;
-            this.items = items;
-        }
+        public Currency Currency { get; set; }
 
-        public Category Category => category;
+        public decimal Discount { get; set; }
 
-        public Currency Currency => currency;
+        public int Id { get; set; }
 
-        public decimal Discount => discount;
+        public TransferItem[] Items { get; set; }
 
-        public int Id => id;
+        public string Note { get; set; }
 
-        public TransferItem[] Items => items;
+        public Partner Partner { get; set; }
 
-        public string Note => note;
+        public DateTime Time { get; set; }
 
-        public Partner Partner => partner;
-
-        public DateTime Time => time;
-
-        public string Title => title;
+        public string Title { get; set; }
     }
 
     public class NewTransfer
     {
-        private readonly int categoryId;
-        private readonly int currencyId;
-        private readonly decimal discount;
-        private readonly NewTransferItem[] items;
-        private readonly string note;
-        private readonly int partnerId;
-        private readonly DateTime time;
-        private readonly string title;
+        public int CategoryId { get; set; }
 
-        public NewTransfer(
-            int categoryId,
-            int partnerId,
-            int currencyId,
-            string title,
-            DateTime time,
-            decimal discount,
-            string note,
-            NewTransferItem[] items)
-        {
-            this.categoryId = categoryId;
-            this.partnerId = partnerId;
-            this.currencyId = currencyId;
-            this.title = title;
-            this.time = time;
-            this.discount = discount;
-            this.note = note;
-            this.items = items;
-        }
+        public int CurrencyId { get; set; }
 
-        public int CategoryId => categoryId;
+        public decimal Discount { get; set; }
 
-        public int CurrencyId => currencyId;
+        public NewTransferItem[] Items { get; set; }
 
-        public decimal Discount => discount;
+        public string Note { get; set; }
 
-        public NewTransferItem[] Items => items;
+        public int PartnerId { get; set; }
 
-        public string Note => note;
+        public DateTime Time { get; set; }
 
-        public int PartnerId => partnerId;
-
-        public DateTime Time => time;
-
-        public string Title => title;
+        public string Title { get; set; }
     }
 
     public class TransferUpdate
     {
-        private readonly int categoryId;
-        private readonly int currencyId;
-        private readonly decimal discount;
-        private readonly int id;
-        private readonly TransferItemUpdate[] items;
-        private readonly string note;
-        private readonly int partnerId;
-        private readonly DateTime time;
-        private readonly string title;
+        public int CategoryId { get; set; }
 
-        public TransferUpdate(
-            int id,
-            int categoryId,
-            int partnerId,
-            int currencyId,
-            string title,
-            DateTime time,
-            decimal discount,
-            string note,
-            TransferItemUpdate[] items)
-        {
-            this.id = id;
-            this.categoryId = categoryId;
-            this.partnerId = partnerId;
-            this.currencyId = currencyId;
-            this.title = title;
-            this.time = time;
-            this.discount = discount;
-            this.note = note;
-            this.items = items;
-        }
+        public int CurrencyId { get; set; }
 
-        public int CategoryId => categoryId;
+        public decimal Discount { get; set; }
 
-        public int CurrencyId => currencyId;
+        public int Id { get; set; }
 
-        public decimal Discount => discount;
+        public TransferItemUpdate[] Items { get; set; }
 
-        public int Id => id;
+        public string Note { get; set; }
 
-        public TransferItemUpdate[] Items => items;
+        public int PartnerId { get; set; }
 
-        public string Note => note;
+        public DateTime Time { get; set; }
 
-        public int PartnerId => partnerId;
-
-        public DateTime Time => time;
-
-        public string Title => title;
+        public string Title { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace ExinServer.Test.ControllerTests
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
-                controller.Create(new NewCurrency(null));
+                controller.Create(new NewCurrency { Code = null });
         }
 
         [TestMethod]
@@ -171,7 +171,7 @@ namespace ExinServer.Test.ControllerTests
         {
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
-                controller.Update(new CurrencyUpdate(1, null));
+                controller.Update(new CurrencyUpdate { Id = 1, Code = null });
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@ namespace ExinServer.Test.ControllerTests
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new CurrenciesController(dataLayer))
             {
-                var currencyUpdate = new CurrencyUpdate(1, "USD");
+                var currencyUpdate = new CurrencyUpdate { Id = 1, Code = "USD" };
                 controller.Update(currencyUpdate);
             }
         }
@@ -195,7 +195,7 @@ namespace ExinServer.Test.ControllerTests
             using (var controller = new CurrenciesController(dataLayer))
             {
                 createdCurrency = controller.CreateCurrency(TestDataProvider.CreateNewCurrency());
-                controller.Update(new CurrencyUpdate(createdCurrency.Id, "USD"));
+                controller.Update(new CurrencyUpdate { Id = createdCurrency.Id, Code = "USD" });
                 updatedCurrency = controller.Get(createdCurrency.Id);
             }
 

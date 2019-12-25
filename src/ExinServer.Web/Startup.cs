@@ -72,7 +72,7 @@ namespace ExinServer.Web
             try
             {
                 ConfigureDataService(services);
-                services.AddControllers().AddNewtonsoftJson();
+                services.AddControllers();
                 services.AddRouting();
             }
             catch (Exception exception)

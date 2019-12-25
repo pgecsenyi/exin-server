@@ -55,7 +55,7 @@ namespace ExinServer.Web.EntityExtensions
             if (dto == null)
                 return null;
 
-            return new TransferItem(dto.Id, dto.Name, dto.Price, dto.Discount);
+            return new TransferItem { Id = dto.Id, Name = dto.Name, Price = dto.Price, Discount = dto.Discount };
         }
 
         public static IEnumerable<TransferItem> ToWeb(this IEnumerable<AbstractEntities.TransferItem> dto)

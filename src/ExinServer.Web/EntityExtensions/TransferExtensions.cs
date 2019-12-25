@@ -61,16 +61,18 @@ namespace ExinServer.Web.EntityExtensions
             if (dto == null)
                 return null;
 
-            return new Transfer(
-                category: dto.Category.ToWeb(),
-                currency: dto.Currency.ToWeb(),
-                discount: dto.Discount,
-                id: dto.Id,
-                items: dto.Items.ToWeb().ToArray(),
-                note: dto.Note,
-                partner: dto.Partner.ToWeb(),
-                title: dto.Title,
-                time: dto.Time);
+            return new Transfer
+            {
+                Category = dto.Category.ToWeb(),
+                Currency = dto.Currency.ToWeb(),
+                Discount = dto.Discount,
+                Id = dto.Id,
+                Items = dto.Items.ToWeb().ToArray(),
+                Note = dto.Note,
+                Partner = dto.Partner.ToWeb(),
+                Title = dto.Title,
+                Time = dto.Time,
+            };
         }
 
         public static IEnumerable<Transfer> ToWeb(this IEnumerable<AbstractEntities.Transfer> web)

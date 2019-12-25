@@ -43,9 +43,21 @@ namespace ExinServer.Test.ControllerTests
         [ExpectedException(typeof(InvalidRequestArgumentException))]
         public void Create_WhenTitleNull_ShouldThrow()
         {
+            var newTransfer = new NewTransfer
+            {
+                CategoryId = 1,
+                PartnerId = 1,
+                CurrencyId = 1,
+                Title = null,
+                Time = DateTime.UtcNow,
+                Discount = 0.3M,
+                Note = null,
+                Items = null,
+            };
+
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new TransfersController(dataLayer))
-                controller.Create(new NewTransfer(1, 1, 1, null, DateTime.UtcNow, 0.3M, null, null));
+                controller.Create(newTransfer);
         }
 
         [TestMethod]
@@ -232,9 +244,22 @@ namespace ExinServer.Test.ControllerTests
         [ExpectedException(typeof(InvalidRequestArgumentException))]
         public void Update_WhenNameNull_ShouldThrow()
         {
+            var transferUpdate = new TransferUpdate
+            {
+                Id = 1,
+                CategoryId = 1,
+                PartnerId = 1,
+                CurrencyId = 1,
+                Title = null,
+                Time = DateTime.UtcNow,
+                Discount = 0.3M,
+                Note = null,
+                Items = null,
+            };
+
             using (var dataLayer = DataLayerHelper.CreateDataLayer())
             using (var controller = new TransfersController(dataLayer))
-                controller.Update(new TransferUpdate(1, 1, 1, 1, null, DateTime.UtcNow, 0.3M, null, null));
+                controller.Update(transferUpdate);
         }
 
         [TestMethod]

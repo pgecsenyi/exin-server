@@ -44,7 +44,7 @@ namespace ExinServer.Web.EntityExtensions
             if (dao == null)
                 return null;
 
-            return new Currency(dao.Id, dao.Code);
+            return new Currency { Id = dao.Id, Code = dao.Code };
         }
 
         public static IEnumerable<Currency> ToWeb(this IEnumerable<AbstractEntities.Currency> dao)

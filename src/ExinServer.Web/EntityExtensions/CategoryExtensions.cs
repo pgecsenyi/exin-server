@@ -44,7 +44,7 @@ namespace ExinServer.Web.EntityExtensions
             if (dao == null)
                 return null;
 
-            return new Category(dao.Id, dao.Name);
+            return new Category { Id = dao.Id, Name = dao.Name };
         }
 
         public static IEnumerable<Category> ToWeb(this IEnumerable<AbstractEntities.Category> dao)

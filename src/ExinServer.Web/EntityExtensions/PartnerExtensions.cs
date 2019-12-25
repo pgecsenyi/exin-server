@@ -44,7 +44,7 @@ namespace ExinServer.Web.EntityExtensions
             if (dao == null)
                 return null;
 
-            return new Partner(dao.Id, dao.Name, dao.Address);
+            return new Partner { Id = dao.Id, Name = dao.Name, Address = dao.Address };
         }
 
         public static IEnumerable<Partner> ToWeb(this IEnumerable<AbstractEntities.Partner> dao)

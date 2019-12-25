@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExinServer.Web.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class CategoriesController : Controller
     {

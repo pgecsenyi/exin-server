@@ -18,45 +18,20 @@ namespace ExinServer.Web.Entities
 {
     public class Category
     {
-        private readonly int id;
-        private readonly string name;
+        public int Id { get; set; }
 
-        public Category(int id, string name)
-        {
-            this.id = id;
-            this.name = name;
-        }
-
-        public int Id => id;
-
-        public string Name => name;
+        public string Name { get; set; }
     }
 
     public class NewCategory
     {
-        private readonly string name;
-
-        public NewCategory(string name)
-        {
-            this.name = name;
-        }
-
-        public string Name => name;
+        public string Name { get; set; }
     }
 
     public class CategoryUpdate
     {
-        private readonly int id;
-        private readonly string name;
+        public int Id { get; set; }
 
-        public CategoryUpdate(int id, string name)
-        {
-            this.id = id;
-            this.name = name;
-        }
-
-        public int Id => id;
-
-        public string Name => name;
+        public string Name { get; set; }
     }
 }
